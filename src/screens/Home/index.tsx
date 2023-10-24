@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Alert, Text, TextInput, View } from "react-native";
+import { Alert, Text, TextInput, View, Image, ImageStyle } from "react-native";
 import { Tecnologias } from "../../components/Tecnologias";
 import { Button } from "../../components/Button";
 
@@ -10,6 +10,8 @@ export function Home(){
     const [nomes, setNome] = useState([] as string []);
     const [tecnologiasCriadas, setTecnologiasCriadas] = useState(0);
 
+    const [isFocused, setIsFocused] = useState(false);
+
 
     function addTecnologia(){
         if(nomes.includes(nomeTecnologia) || nomeTecnologia === ''){
@@ -19,7 +21,7 @@ export function Home(){
             setTecnologiasCriadas(tecnologiasCriadas + 1);
         }
         setNomeTecnologia('');
-        console.log(nomes);
+        //console.log(nomes);
     }
 
     function removeTecnologia(nome:string){
@@ -28,6 +30,7 @@ export function Home(){
                 text:'Sim',
                 onPress:()=>{
                     setNome(nomes.filter(Tecnologias => Tecnologias !== nome))
+                    setTecnologiasCriadas(tecnologiasCriadas - 1)
                 }
             },{
                 text:'Não'
@@ -41,11 +44,13 @@ return(
 
         <View style = {style.containerRegisterTec}>
            <TextInput
-           style = {style.input}
+           style = {[style.input, isFocused && style.textInputFocused,]}
            placeholder="Adicione uma tecnologia"
            placeholderTextColor='#808080'
            onChangeText={text => setNomeTecnologia(text)}
            value={nomeTecnologia}
+           onFocus={()=> setIsFocused(true)}
+           onBlur={()=> setIsFocused(false)}
            />
            <Button
            title="+"
@@ -61,7 +66,14 @@ return(
     <View style={style.containerList}>
         {
             nomes.length === 0 ? (
+                <View>
                 <Text style={style.listTec}>Nenhuma tecnologia cadastrada? Adicione alguma a lista</Text>
+                <Image
+                    source={require('./caderno.png')}
+                    style={style.ImageStyle} 
+                     />
+                </View>
+                
             ) : (
                 nomes.map(item =>(
                     <Tecnologias key={item} nome={item} remove={() => removeTecnologia(item)}/>
