@@ -5,7 +5,7 @@ export const style = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 24,
     paddingTop: 75,
-    backgroundColor: '#131016'
+    backgroundColor: '#131016',
   },
   title: {
     color: '#FDFCFE',
@@ -24,7 +24,6 @@ export const style = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     fontSize: 14,
     color: 'black',
-
     padding: 12,
     borderColor: 'transparent',
     borderWidth: 2,
@@ -38,16 +37,19 @@ export const style = StyleSheet.create({
   subTituloTecD: {
     color: '#FDFCFE',
     fontSize: 24,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   containerInfo: {
     flexDirection: 'row',
+    borderBottomWidth:1,
+    borderColor:"#A9A9A9",
   },
   subTituloTec: {
     color: '#FDFCFE',
     fontSize: 15,
     fontWeight: 'bold',
-    marginRight: 220
+    marginRight: 200,
+    margin:5
 
   },
   containerList: {
@@ -63,6 +65,10 @@ export const style = StyleSheet.create({
     height: 30,
     alignSelf: 'center',
     margin: 10
-  }
+  },
+  listItem:{
+    margin: 10,
+    width:290,
+   },
 
 })

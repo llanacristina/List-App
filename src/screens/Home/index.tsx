@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Alert, Text, TextInput, View, Image, ImageStyle } from "react-native";
+import { Alert, Text, TextInput, View, Image } from "react-native";
 import { Tecnologias } from "../../components/Tecnologias";
 import { Button } from "../../components/Button";
+
 
 import { style } from "./style";
 
@@ -9,16 +10,31 @@ export function Home(){
     const [nomeTecnologia, setNomeTecnologia] = useState('');
     const [nomes, setNome] = useState([] as string []);
     const [tecnologiasCriadas, setTecnologiasCriadas] = useState(0);
+    const [tecnologiasConcluidas, setTecnologiasConcluidas] = useState(0);
 
     const [isFocused, setIsFocused] = useState(false);
+    const [isChecked, setIsChecked] = useState({} as Record<string, boolean>);
 
+    function toggleCheck(nome: string){
+        setIsChecked({...isChecked,[nome]: !isChecked[nome],
+        })
+        if(isChecked[nome]){
+            setTecnologiasConcluidas(tecnologiasConcluidas - 1);
+        } else{
+            setTecnologiasConcluidas(tecnologiasConcluidas + 1);
+        }
+    }
 
     function addTecnologia(){
         if(nomes.includes(nomeTecnologia) || nomeTecnologia === ''){
             Alert.alert('Error', "Tecnologia já existe ou não foi digitada ainda!");
         }else{
+            const novaTecnologia = nomeTecnologia.trim();
+            if(novaTecnologia){
             setNome([...nomes,nomeTecnologia]);
             setTecnologiasCriadas(tecnologiasCriadas + 1);
+            setIsChecked({...isChecked,[novaTecnologia]: false});
+            }
         }
         setNomeTecnologia('');
         //console.log(nomes);
@@ -31,6 +47,9 @@ export function Home(){
                 onPress:()=>{
                     setNome(nomes.filter(Tecnologias => Tecnologias !== nome))
                     setTecnologiasCriadas(tecnologiasCriadas - 1)
+                    if (isChecked[nome]) {
+                        setTecnologiasConcluidas(tecnologiasConcluidas - 1);
+                      }
                 }
             },{
                 text:'Não'
@@ -60,7 +79,7 @@ return(
 
     <View style = {style.containerInfo}>
     <Text style={style.subTituloTec}>Criadas ({tecnologiasCriadas})</Text>
-    <Text style={style.subTituloTec}>Concluidas</Text>
+    <Text style={style.subTituloTec}>Concluidas({tecnologiasConcluidas})</Text>
     </View>
 
     <View style={style.containerList}>
@@ -75,11 +94,20 @@ return(
                 </View>
                 
             ) : (
-                nomes.map(item =>(
-                    <Tecnologias key={item} nome={item} remove={() => removeTecnologia(item)}/>
-                ))
-            )
-        }
+                nomes.map((item =>(
+              <View style={style.listItem} key={item}>
+                <View style={{flexDirection:"row", alignItems:"center"}}>
+              <Button
+                title={isChecked[item] ? "✓" : " "}
+                onPress={() => toggleCheck(item)}
+              />
+              <Tecnologias nome={item} remove={() => removeTecnologia(item)} />
+            </View>
+            </View>
+          ))
+        )
+    )}
+
     </View>
 
 </View>

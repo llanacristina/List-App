@@ -10,7 +10,7 @@ import {
     title:string;
   }
   export function Button({title, ...rest}:Props){
-    const backgroundColorButton = title ==='+'? 'blue': '#bf2d07';
+    const backgroundColorButton = title ==='+'? 'blue': 'blue';
     
     return (
        <TouchableOpacity style={[style.button,{backgroundColor:backgroundColorButton}]} {...rest}>

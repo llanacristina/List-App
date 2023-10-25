@@ -6,8 +6,6 @@ import { style } from "./style";
 interface TecnologiasProps {
   nome: string;
   remove: (nome: string) => void;
-  // isChecked: boolean;
-  // toggleCheck:() => void
 }
 
 export function Tecnologias({ nome, remove }: TecnologiasProps) {
@@ -18,7 +16,6 @@ export function Tecnologias({ nome, remove }: TecnologiasProps) {
       <TouchableOpacity onPress={() => remove(nome)}>
         <Image
           source={require('./imageL.png')} 
-          //style={style.lixeiraImage} // Estilo para a imagem da lixeira
         />
       </TouchableOpacity>
     </View>
