@@ -10,7 +10,8 @@ export const style = StyleSheet.create({
   title: {
     color: '#FDFCFE',
     fontSize: 34,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    textAlign:'center'
   },
   containerRegisterTec: {
     flexDirection: 'row',
@@ -49,7 +50,8 @@ export const style = StyleSheet.create({
     fontSize: 15,
     fontWeight: 'bold',
     marginRight: 200,
-    margin:5
+    margin:5,
+    borderRadius:10
 
   },
   containerList: {

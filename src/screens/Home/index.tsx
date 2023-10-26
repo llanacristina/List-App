@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Alert, Text, TextInput, View, Image } from "react-native";
 import { Tecnologias } from "../../components/Tecnologias";
-import { Button } from "../../components/Button";
+import { ButtonAdd, ButtonCheck } from "../../components/Button";
 
 
 import { style } from "./style";
@@ -71,7 +71,7 @@ return(
            onFocus={()=> setIsFocused(true)}
            onBlur={()=> setIsFocused(false)}
            />
-           <Button
+           <ButtonAdd
            title="+"
            onPress={addTecnologia}
            />
@@ -79,9 +79,9 @@ return(
 
     <View style = {style.containerInfo}>
     <Text style={style.subTituloTec}>Criadas ({tecnologiasCriadas})</Text>
-    <Text style={style.subTituloTec}>Concluidas({tecnologiasConcluidas})</Text>
+    <Text style={style.subTituloTec}>Concluidas ({tecnologiasConcluidas})</Text>
     </View>
-
+    
     <View style={style.containerList}>
         {
             nomes.length === 0 ? (
@@ -97,11 +97,12 @@ return(
                 nomes.map((item =>(
               <View style={style.listItem} key={item}>
                 <View style={{flexDirection:"row", alignItems:"center"}}>
-              <Button
+              <ButtonCheck
                 title={isChecked[item] ? "✓" : " "}
                 onPress={() => toggleCheck(item)}
+                style={{width:30,height:30,backgroundColor:'white',alignItems:'center'}} textStyle={{color:'blue'}}
               />
-              <Tecnologias nome={item} remove={() => removeTecnologia(item)} />
+              <Tecnologias nome={item} remove={() => removeTecnologia(item)} isConcluido={isChecked[item]} />
             </View>
             </View>
           ))
