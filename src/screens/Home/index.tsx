@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Alert, Text, TextInput, View, Image } from "react-native";
+import { Alert, Text, TextInput, View, Image, ScrollView } from "react-native";
 import { Tecnologias } from "../../components/Tecnologias";
 import { ButtonAdd, ButtonCheck } from "../../components/Button";
+import * as Progress from 'react-native-progress';
 
 
 import { style } from "./style";
@@ -78,11 +79,28 @@ return(
     </View>
 
     <View style = {style.containerInfo}>
-    <Text style={style.subTituloTec}>Criadas ({tecnologiasCriadas})</Text>
-    <Text style={style.subTituloTec}>Concluidas ({tecnologiasConcluidas})</Text>
+        <View style={style.containerTitulo}>
+            <Text style={style.subTituloTec}>Criadas</Text>
+            <Text style={style.containerTextTec}>{tecnologiasCriadas}</Text>
+        </View>
+        <View style={style.containerTitulo}>
+            <Text style={style.subTituloTec}>Concluidas</Text>
+            <Text style={style.containerTextTec}>{tecnologiasConcluidas}</Text>
+        </View>
+    </View>
+
+    <View style={style.progressBar}>
+        <Progress.Bar style={{backgroundColor:"white", borderRadius:5}}
+        progress={tecnologiasConcluidas !== 0 ? tecnologiasConcluidas / tecnologiasCriadas: 0}
+        height={2}
+        width={null}
+        borderWidth={0}
+        color="blue"
+        unfilledColor= {tecnologiasCriadas !== 0 ? "white" : "blue"}
+        />
     </View>
     
-    <View style={style.containerList}>
+    <ScrollView style={style.containerList}>
         {
             nomes.length === 0 ? (
                 <View>
@@ -109,7 +127,7 @@ return(
         )
     )}
 
-    </View>
+    </ScrollView>
 
 </View>
 )

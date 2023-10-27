@@ -41,15 +41,20 @@ export const style = StyleSheet.create({
     fontWeight: 'bold',
   },
   containerInfo: {
+    display: 'flex',
     flexDirection: 'row',
-    borderBottomWidth:1,
+    justifyContent: 'space-between',
+    //borderBottomWidth:1,
     borderColor:"#A9A9A9",
+    paddingBottom: 10,
+    alignItems: 'center',
+    //marginBottom:5
+
   },
   subTituloTec: {
     color: '#FDFCFE',
     fontSize: 15,
     fontWeight: 'bold',
-    marginRight: 200,
     margin:5,
     borderRadius:10
 
@@ -72,5 +77,19 @@ export const style = StyleSheet.create({
     margin: 10,
     width:290,
    },
+   containerTitulo:{
+    display: 'flex', 
+    flexDirection: 'row',
+    alignItems:'center'
+   },
+   containerTextTec:{
+    backgroundColor: '#FFFFFF',
+    borderRadius: 90, 
+    textAlign: 'center', 
+    height: 20,
+    width:30,
+    color:'#808080'
+   },
+   progressBar:{}
 
 })
